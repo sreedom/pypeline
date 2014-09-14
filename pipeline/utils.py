@@ -9,7 +9,9 @@ def makeGen(fun):
     '''
     def foo(inList, *args, **kwargs):
         for i in inList:
-            yield fun(i, *args, **kwargs)
+            ret = fun(i, *args, **kwargs)
+            if ret is not None:
+                yield ret
     return foo
 
 def fOg(f1,f2):

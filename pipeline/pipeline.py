@@ -51,14 +51,25 @@ class Phase(object):
         '''runs self._fun on the input list
         return an iterable (generator/list) as output
         '''
-        return self._fun(input_list, **self.initial_cfg)
+        return self._fun(input_list, self._cfg)
 
 emptyPhase = Phase(lambda x : x, name="EmptyPhase")
 
 class RowPhase(Phase):
-    def __init__(self, run_fun, *args, **kwargs):
+    def __init__(self, run_fun, name=None, initial_cfg=None):
         '''like Phase, but the run_fun is expected to accept an object in the list
         and return an object'''
         fun = makeGen(run_fun)
-        super(RowPhase, self).__init__(run_fun=fun, *args, **kwargs)
+        super(RowPhase, self).__init__(run_fun=fun, initial_cfg=initial_cfg)
 
+
+
+
+
+
+##############################################################################################################
+####TODO list
+##############################################################################################################
+
+# 1. preprocess (add stuff to context before phase)
+# 1. post process (shutdown stuff from context after phase)
